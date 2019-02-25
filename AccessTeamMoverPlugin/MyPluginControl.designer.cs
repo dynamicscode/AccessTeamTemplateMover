@@ -31,8 +31,9 @@
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.aboutToolButton = new System.Windows.Forms.ToolStripLabel();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.exportGroupBox = new System.Windows.Forms.GroupBox();
             this.exportFileNameLabel = new System.Windows.Forms.Label();
             this.exportFileNameTextBox = new System.Windows.Forms.TextBox();
@@ -50,10 +51,7 @@
             this.transferButton = new System.Windows.Forms.Button();
             this.targetEnvironmentButton = new System.Windows.Forms.Button();
             this.targetEnvironmentTextBox = new System.Windows.Forms.TextBox();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.aboutToolButton = new System.Windows.Forms.ToolStripLabel();
             this.toolStripMenu.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.exportGroupBox.SuspendLayout();
             this.importGroupBox.SuspendLayout();
             this.transferGroupBox.SuspendLayout();
@@ -68,7 +66,7 @@
             this.aboutToolButton});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
-            this.toolStripMenu.Size = new System.Drawing.Size(559, 25);
+            this.toolStripMenu.Size = new System.Drawing.Size(806, 25);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
             // 
@@ -85,20 +83,20 @@
             this.tssSeparator1.Name = "tssSeparator1";
             this.tssSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // flowLayoutPanel1
+            // aboutToolButton
             // 
-            this.flowLayoutPanel1.Controls.Add(this.exportGroupBox);
-            this.flowLayoutPanel1.Controls.Add(this.importGroupBox);
-            this.flowLayoutPanel1.Controls.Add(this.transferGroupBox);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 25);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(559, 411);
-            this.flowLayoutPanel1.TabIndex = 6;
+            this.aboutToolButton.Name = "aboutToolButton";
+            this.aboutToolButton.Size = new System.Drawing.Size(40, 22);
+            this.aboutToolButton.Text = "About";
+            this.aboutToolButton.Click += new System.EventHandler(this.aboutToolButton_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // exportGroupBox
             // 
+            this.exportGroupBox.AutoSize = true;
             this.exportGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.exportGroupBox.Controls.Add(this.exportFileNameLabel);
             this.exportGroupBox.Controls.Add(this.exportFileNameTextBox);
@@ -106,10 +104,11 @@
             this.exportGroupBox.Controls.Add(this.exportAndSaveButton);
             this.exportGroupBox.Controls.Add(this.exportFilePathButton);
             this.exportGroupBox.Controls.Add(this.exportFilePathTextBox);
-            this.exportGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.exportGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.exportGroupBox.Location = new System.Drawing.Point(0, 25);
             this.exportGroupBox.Name = "exportGroupBox";
-            this.exportGroupBox.Size = new System.Drawing.Size(553, 112);
-            this.exportGroupBox.TabIndex = 6;
+            this.exportGroupBox.Size = new System.Drawing.Size(806, 119);
+            this.exportGroupBox.TabIndex = 7;
             this.exportGroupBox.TabStop = false;
             this.exportGroupBox.Text = "Export";
             // 
@@ -124,9 +123,11 @@
             // 
             // exportFileNameTextBox
             // 
+            this.exportFileNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.exportFileNameTextBox.Location = new System.Drawing.Point(60, 46);
             this.exportFileNameTextBox.Name = "exportFileNameTextBox";
-            this.exportFileNameTextBox.Size = new System.Drawing.Size(378, 20);
+            this.exportFileNameTextBox.Size = new System.Drawing.Size(631, 20);
             this.exportFileNameTextBox.TabIndex = 5;
             this.exportFileNameTextBox.Text = "accessteams.xml";
             // 
@@ -141,42 +142,46 @@
             // 
             // exportAndSaveButton
             // 
-            this.exportAndSaveButton.Location = new System.Drawing.Point(443, 46);
+            this.exportAndSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.exportAndSaveButton.Location = new System.Drawing.Point(696, 46);
             this.exportAndSaveButton.Name = "exportAndSaveButton";
             this.exportAndSaveButton.Size = new System.Drawing.Size(104, 54);
             this.exportAndSaveButton.TabIndex = 3;
             this.exportAndSaveButton.Text = "Export and Save";
             this.exportAndSaveButton.UseVisualStyleBackColor = true;
-            this.exportAndSaveButton.Click += new System.EventHandler(this.exportAndSaveButton_Click);
             // 
             // exportFilePathButton
             // 
-            this.exportFilePathButton.Location = new System.Drawing.Point(443, 18);
+            this.exportFilePathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.exportFilePathButton.Location = new System.Drawing.Point(696, 18);
             this.exportFilePathButton.Name = "exportFilePathButton";
             this.exportFilePathButton.Size = new System.Drawing.Size(104, 23);
             this.exportFilePathButton.TabIndex = 2;
             this.exportFilePathButton.Text = "Choose file path";
             this.exportFilePathButton.UseVisualStyleBackColor = true;
-            this.exportFilePathButton.Click += new System.EventHandler(this.exportFilePathButton_Click);
             // 
             // exportFilePathTextBox
             // 
+            this.exportFilePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.exportFilePathTextBox.Location = new System.Drawing.Point(60, 20);
             this.exportFilePathTextBox.Name = "exportFilePathTextBox";
-            this.exportFilePathTextBox.Size = new System.Drawing.Size(378, 20);
+            this.exportFilePathTextBox.Size = new System.Drawing.Size(631, 20);
             this.exportFilePathTextBox.TabIndex = 1;
             // 
             // importGroupBox
             // 
+            this.importGroupBox.AutoSize = true;
             this.importGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.importGroupBox.Controls.Add(this.importFileLabel);
             this.importGroupBox.Controls.Add(this.importButton);
             this.importGroupBox.Controls.Add(this.chooseImportFileButton);
             this.importGroupBox.Controls.Add(this.importFileTextBox);
-            this.importGroupBox.Location = new System.Drawing.Point(3, 121);
+            this.importGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.importGroupBox.Location = new System.Drawing.Point(0, 144);
             this.importGroupBox.Name = "importGroupBox";
-            this.importGroupBox.Size = new System.Drawing.Size(553, 112);
-            this.importGroupBox.TabIndex = 7;
+            this.importGroupBox.Size = new System.Drawing.Size(806, 119);
+            this.importGroupBox.TabIndex = 8;
             this.importGroupBox.TabStop = false;
             this.importGroupBox.Text = "Import";
             // 
@@ -191,42 +196,46 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(443, 46);
+            this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.importButton.Location = new System.Drawing.Point(696, 46);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(104, 54);
             this.importButton.TabIndex = 3;
             this.importButton.Text = "Import";
             this.importButton.UseVisualStyleBackColor = true;
-            this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
             // chooseImportFileButton
             // 
-            this.chooseImportFileButton.Location = new System.Drawing.Point(443, 18);
+            this.chooseImportFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chooseImportFileButton.Location = new System.Drawing.Point(696, 18);
             this.chooseImportFileButton.Name = "chooseImportFileButton";
             this.chooseImportFileButton.Size = new System.Drawing.Size(104, 23);
             this.chooseImportFileButton.TabIndex = 2;
             this.chooseImportFileButton.Text = "Choose file";
             this.chooseImportFileButton.UseVisualStyleBackColor = true;
-            this.chooseImportFileButton.Click += new System.EventHandler(this.chooseImportFileButton_Click);
             // 
             // importFileTextBox
             // 
+            this.importFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.importFileTextBox.Location = new System.Drawing.Point(60, 20);
             this.importFileTextBox.Name = "importFileTextBox";
-            this.importFileTextBox.Size = new System.Drawing.Size(378, 20);
+            this.importFileTextBox.Size = new System.Drawing.Size(631, 20);
             this.importFileTextBox.TabIndex = 1;
             // 
             // transferGroupBox
             // 
+            this.transferGroupBox.AutoSize = true;
             this.transferGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.transferGroupBox.Controls.Add(this.targetEnvironmentLabel);
             this.transferGroupBox.Controls.Add(this.transferButton);
             this.transferGroupBox.Controls.Add(this.targetEnvironmentButton);
             this.transferGroupBox.Controls.Add(this.targetEnvironmentTextBox);
-            this.transferGroupBox.Location = new System.Drawing.Point(3, 239);
+            this.transferGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.transferGroupBox.Location = new System.Drawing.Point(0, 263);
             this.transferGroupBox.Name = "transferGroupBox";
-            this.transferGroupBox.Size = new System.Drawing.Size(553, 112);
-            this.transferGroupBox.TabIndex = 8;
+            this.transferGroupBox.Size = new System.Drawing.Size(806, 119);
+            this.transferGroupBox.TabIndex = 9;
             this.transferGroupBox.TabStop = false;
             this.transferGroupBox.Text = "Transfer";
             // 
@@ -241,55 +250,48 @@
             // 
             // transferButton
             // 
-            this.transferButton.Location = new System.Drawing.Point(443, 46);
+            this.transferButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.transferButton.Location = new System.Drawing.Point(696, 46);
             this.transferButton.Name = "transferButton";
             this.transferButton.Size = new System.Drawing.Size(104, 54);
             this.transferButton.TabIndex = 3;
             this.transferButton.Text = "Transfer";
             this.transferButton.UseVisualStyleBackColor = true;
-            this.transferButton.Click += new System.EventHandler(this.transferButton_Click);
             // 
             // targetEnvironmentButton
             // 
-            this.targetEnvironmentButton.Location = new System.Drawing.Point(443, 18);
+            this.targetEnvironmentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.targetEnvironmentButton.Location = new System.Drawing.Point(696, 18);
             this.targetEnvironmentButton.Name = "targetEnvironmentButton";
             this.targetEnvironmentButton.Size = new System.Drawing.Size(104, 23);
             this.targetEnvironmentButton.TabIndex = 2;
             this.targetEnvironmentButton.Text = "Choose target";
             this.targetEnvironmentButton.UseVisualStyleBackColor = true;
-            this.targetEnvironmentButton.Click += new System.EventHandler(this.targetEnvironmentButton_Click);
             // 
             // targetEnvironmentTextBox
             // 
+            this.targetEnvironmentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.targetEnvironmentTextBox.Location = new System.Drawing.Point(60, 20);
             this.targetEnvironmentTextBox.Name = "targetEnvironmentTextBox";
             this.targetEnvironmentTextBox.ReadOnly = true;
-            this.targetEnvironmentTextBox.Size = new System.Drawing.Size(378, 20);
+            this.targetEnvironmentTextBox.Size = new System.Drawing.Size(631, 20);
             this.targetEnvironmentTextBox.TabIndex = 1;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
-            // aboutToolButton
-            // 
-            this.aboutToolButton.Name = "aboutToolButton";
-            this.aboutToolButton.Size = new System.Drawing.Size(40, 22);
-            this.aboutToolButton.Text = "About";
-            this.aboutToolButton.Click += new System.EventHandler(this.aboutToolButton_Click);
             // 
             // MyPluginControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.AutoScroll = true;
+            this.Controls.Add(this.transferGroupBox);
+            this.Controls.Add(this.importGroupBox);
+            this.Controls.Add(this.exportGroupBox);
             this.Controls.Add(this.toolStripMenu);
             this.Name = "MyPluginControl";
-            this.Size = new System.Drawing.Size(559, 436);
+            this.Size = new System.Drawing.Size(806, 655);
             this.Load += new System.EventHandler(this.MyPluginControl_Load);
             this.toolStripMenu.ResumeLayout(false);
             this.toolStripMenu.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.exportGroupBox.ResumeLayout(false);
             this.exportGroupBox.PerformLayout();
             this.importGroupBox.ResumeLayout(false);
@@ -306,7 +308,8 @@
         private System.Windows.Forms.ToolStripButton tsbClose;
         private System.Windows.Forms.ToolStripSeparator tssSeparator1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStripLabel aboutToolButton;
         private System.Windows.Forms.GroupBox exportGroupBox;
         private System.Windows.Forms.Label exportFileNameLabel;
         private System.Windows.Forms.TextBox exportFileNameTextBox;
@@ -319,12 +322,10 @@
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.Button chooseImportFileButton;
         private System.Windows.Forms.TextBox importFileTextBox;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.GroupBox transferGroupBox;
         private System.Windows.Forms.Label targetEnvironmentLabel;
         private System.Windows.Forms.Button transferButton;
         private System.Windows.Forms.Button targetEnvironmentButton;
         private System.Windows.Forms.TextBox targetEnvironmentTextBox;
-        private System.Windows.Forms.ToolStripLabel aboutToolButton;
     }
 }
