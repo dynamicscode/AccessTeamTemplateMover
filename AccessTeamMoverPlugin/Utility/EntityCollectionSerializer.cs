@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
-namespace AccessTeamMoverPlugin.Utility
+namespace AccessTeamTemplateMoverPlugin.Utility
 {
     public class EntityCollectionSerializer
     {

@@ -1,6 +1,7 @@
-﻿using AccessTeamMoverPlugin.Common;
+﻿using AccessTeamTemplateMoverPlugin.Common;
+using AccessTeamTemplateMoverPlugin.Interface;
 
-namespace AccessTeamMoverPlugin.Command
+namespace AccessTeamTemplateMoverPlugin.Command
 {
     internal class CommandFactory
     {

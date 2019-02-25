@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+﻿using AccessTeamTemplateMoverPlugin.Command;
+using AccessTeamTemplateMoverPlugin.Common;
+using AccessTeamTemplateMoverPlugin.Interface;
+using McTools.Xrm.Connection;
+using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
+using System;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
-using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Sdk;
-using McTools.Xrm.Connection;
-using AccessTeamMoverPlugin.Command;
-using System.IO;
-using System.Collections.Specialized;
-using AccessTeamMoverPlugin.Common;
 
-namespace AccessTeamMoverPlugin
+namespace AccessTeamTemplateMoverPlugin
 {
-    public partial class MyPluginControl : MultipleConnectionsPluginControlBase
+    public partial class MyPluginControl : MultipleConnectionsPluginControlBase, ILogWriter
     {
         private Settings mySettings;
 
@@ -29,8 +24,6 @@ namespace AccessTeamMoverPlugin
 
         private void MyPluginControl_Load(object sender, EventArgs e)
         {
-            ShowInfoNotification("This is a notification that can lead to XrmToolBox repository", new Uri("https://github.com/MscrmTools/XrmToolBox"));
-
             // Loads or creates the settings for the plugin
             if (!SettingsManager.Instance.TryLoad(GetType(), out mySettings))
             {
@@ -47,40 +40,6 @@ namespace AccessTeamMoverPlugin
         private void tsbClose_Click(object sender, EventArgs e)
         {
             CloseTool();
-        }
-
-        private void tsbSample_Click(object sender, EventArgs e)
-        {
-            // The ExecuteMethod method handles connecting to an
-            // organization if XrmToolBox is not yet connected
-            ExecuteMethod(GetAccounts);
-        }
-
-        private void GetAccounts()
-        {
-            WorkAsync(new WorkAsyncInfo
-            {
-                Message = "Getting accounts",
-                Work = (worker, args) =>
-                {
-                    args.Result = Service.RetrieveMultiple(new QueryExpression("account")
-                    {
-                        TopCount = 50
-                    });
-                },
-                PostWorkCallBack = (args) =>
-                {
-                    if (args.Error != null)
-                    {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    var result = args.Result as EntityCollection;
-                    if (result != null)
-                    {
-                        MessageBox.Show($"Found {result.Entities.Count} accounts");
-                    }
-                }
-            });
         }
 
         /// <summary>
@@ -110,6 +69,7 @@ namespace AccessTeamMoverPlugin
 
         private void exportFilePathButton_Click(object sender, EventArgs e)
         {
+
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 exportFilePathTextBox.Text = folderBrowserDialog.SelectedPath;
@@ -118,7 +78,32 @@ namespace AccessTeamMoverPlugin
 
         private void exportAndSaveButton_Click(object sender, EventArgs e)
         {
-            Execute(Operation.Export, Path.Combine(exportFilePathTextBox.Text, exportFileNameTextBox.Text));
+            if (string.IsNullOrEmpty(exportFilePathTextBox.Text) || string.IsNullOrEmpty(exportFileNameTextBox.Text))
+            {
+                MessageBox.Show("Please enter File Path and File Name to export.");
+            }
+            else
+            {
+                WorkAsync(new WorkAsyncInfo
+                {
+                    Message = "Exporting access team templates",
+                    Work = (worker, args) =>
+                    {
+                        execute(Operation.Export, Path.Combine(exportFilePathTextBox.Text, exportFileNameTextBox.Text));
+                    },
+                    PostWorkCallBack = (args) =>
+                    {
+                        if (args.Error != null)
+                        {
+                            MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Successfully exported to {Path.Combine(exportFilePathTextBox.Text, exportFileNameTextBox.Text)} from {ConnectionDetail.ConnectionName}.");
+                        }
+                    }
+                });
+            }
         }
 
         private void chooseImportFileButton_Click(object sender, EventArgs e)
@@ -131,7 +116,32 @@ namespace AccessTeamMoverPlugin
 
         private void importButton_Click(object sender, EventArgs e)
         {
-            Execute(Operation.Import, importFileTextBox.Text);
+            if (string.IsNullOrEmpty(importFileTextBox.Text))
+            {
+                MessageBox.Show("Please choose File to import.");
+            }
+            else
+            {
+                WorkAsync(new WorkAsyncInfo
+                {
+                    Message = "Importing access team templates",
+                    Work = (worker, args) =>
+                    {
+                        execute(Operation.Import, importFileTextBox.Text);
+                    },
+                    PostWorkCallBack = (args) =>
+                    {
+                        if (args.Error != null)
+                        {
+                            MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Successfully imported from {importFileTextBox.Text} to {ConnectionDetail.ConnectionName}.");
+                        }
+                    }
+                });
+            }
         }
 
         private void targetEnvironmentButton_Click(object sender, EventArgs e)
@@ -149,62 +159,73 @@ namespace AccessTeamMoverPlugin
 
         private void transferButton_Click(object sender, EventArgs e)
         {
-            WorkAsync(new WorkAsyncInfo
+            if (AdditionalConnectionDetails.Count < 1)
             {
-                Message = $"Transferring access team templates",
-                Work = (worker, args) =>
-                {
-                    ICommand command = CommandFactory.GetInstance(Common.Operation.Export);
-                    command.Service = Service;
-                    command.FileName = "accessteamtemplates_temp.xml";
-                    command.Execute();
+                MessageBox.Show("Please connect to the target organisation.");
+            }
+            else
+            {
+                var fileName = Path.Combine(Application.UserAppDataPath, Path.GetRandomFileName());
 
-                    command = CommandFactory.GetInstance(Common.Operation.Import);
-                    command.Service = AdditionalConnectionDetails.Last().GetCrmServiceClient();
-                    command.FileName = "accessteamtemplates_temp.xml";
-                    command.Execute();
-                },
-                PostWorkCallBack = (args) =>
+                WorkAsync(new WorkAsyncInfo
                 {
-                    if (args.Error != null)
+                    Message = $"Transferring access team templates",
+                    Work = (worker, args) =>
                     {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    var result = args.Result as EntityCollection;
-                    if (result != null)
+                        LogInfo("test");
+                        execute(Operation.Export, fileName);
+                        execute(Operation.Import, fileName, AdditionalConnectionDetails.Last().GetCrmServiceClient());
+                    },
+                    PostWorkCallBack = (args) =>
                     {
-                        MessageBox.Show($"Successfully transferred to {AdditionalConnectionDetails.Last().ConnectionName}");
+                        if (args.Error != null)
+                        {
+                            MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            if (File.Exists(fileName))
+                                File.Delete(fileName);
+                            MessageBox.Show($"Successfully transferred from {ConnectionDetail.ConnectionName} to {AdditionalConnectionDetails.Last().ConnectionName}.");
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
-        private void Execute(Operation operation, string fileName, IOrganizationService service = null)
+        private void execute(Operation operation, string fileName, IOrganizationService service = null)
         {
-            ICommand command = CommandFactory.GetInstance(Common.Operation.Export);
+            ICommand command = CommandFactory.GetInstance(operation);
             command.Service = service ?? Service;
             command.FileName = fileName;
+            command.LogWriter = this;
+            command.OrganisationUrl = service == null ? ConnectionDetail.WebApplicationUrl : AdditionalConnectionDetails.Last().WebApplicationUrl;
+            command.Execute();
+        }
 
-            WorkAsync(new WorkAsyncInfo
-            {
-                Message = $"{(operation == Operation.Export ? "Exporting" : "Importing")} access team templates",
-                Work = (worker, args) =>
-                {
-                    command.Execute();
-                },
-                PostWorkCallBack = (args) =>
-                {
-                    if (args.Error != null)
-                    {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    var result = args.Result as EntityCollection;
-                    if (result != null)
-                    {
-                        MessageBox.Show($"Successfully {(operation == Operation.Export ? "exported to " : "imported from ")} {command.FileName}");
-                    }
-                }
-            });
+        public void LogInfo(string message)
+        {
+            base.LogInfo(message);
+        }
+
+        public void LogError(string message)
+        {
+            base.LogError(message);
+        }
+
+        public void LogWarning(string message)
+        {
+            base.LogWarning(message);
+        }
+
+        public void Open()
+        {
+            base.OpenLogFile();
+        }
+
+        private void aboutToolButton_Click(object sender, EventArgs e)
+        {
+            new AccessTeamTemplateMoverAbout().ShowDialog(this);
         }
     }
 }

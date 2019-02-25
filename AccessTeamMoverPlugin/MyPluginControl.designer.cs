@@ -1,4 +1,4 @@
-﻿namespace AccessTeamMoverPlugin
+﻿namespace AccessTeamTemplateMoverPlugin
 {
     partial class MyPluginControl
     {
@@ -45,12 +45,13 @@
             this.importButton = new System.Windows.Forms.Button();
             this.chooseImportFileButton = new System.Windows.Forms.Button();
             this.importFileTextBox = new System.Windows.Forms.TextBox();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.transferGroupBox = new System.Windows.Forms.GroupBox();
+            this.targetEnvironmentLabel = new System.Windows.Forms.Label();
             this.transferButton = new System.Windows.Forms.Button();
             this.targetEnvironmentButton = new System.Windows.Forms.Button();
             this.targetEnvironmentTextBox = new System.Windows.Forms.TextBox();
-            this.targetEnvironmentLabel = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.aboutToolButton = new System.Windows.Forms.ToolStripLabel();
             this.toolStripMenu.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.exportGroupBox.SuspendLayout();
@@ -63,7 +64,8 @@
             this.toolStripMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbClose,
-            this.tssSeparator1});
+            this.tssSeparator1,
+            this.aboutToolButton});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
             this.toolStripMenu.Size = new System.Drawing.Size(559, 25);
@@ -214,10 +216,6 @@
             this.importFileTextBox.Size = new System.Drawing.Size(378, 20);
             this.importFileTextBox.TabIndex = 1;
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
             // transferGroupBox
             // 
             this.transferGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -231,6 +229,15 @@
             this.transferGroupBox.TabIndex = 8;
             this.transferGroupBox.TabStop = false;
             this.transferGroupBox.Text = "Transfer";
+            // 
+            // targetEnvironmentLabel
+            // 
+            this.targetEnvironmentLabel.AutoSize = true;
+            this.targetEnvironmentLabel.Location = new System.Drawing.Point(7, 20);
+            this.targetEnvironmentLabel.Name = "targetEnvironmentLabel";
+            this.targetEnvironmentLabel.Size = new System.Drawing.Size(38, 13);
+            this.targetEnvironmentLabel.TabIndex = 4;
+            this.targetEnvironmentLabel.Text = "Target";
             // 
             // transferButton
             // 
@@ -260,14 +267,16 @@
             this.targetEnvironmentTextBox.Size = new System.Drawing.Size(378, 20);
             this.targetEnvironmentTextBox.TabIndex = 1;
             // 
-            // targetEnvironmentLabel
+            // openFileDialog
             // 
-            this.targetEnvironmentLabel.AutoSize = true;
-            this.targetEnvironmentLabel.Location = new System.Drawing.Point(7, 20);
-            this.targetEnvironmentLabel.Name = "targetEnvironmentLabel";
-            this.targetEnvironmentLabel.Size = new System.Drawing.Size(38, 13);
-            this.targetEnvironmentLabel.TabIndex = 4;
-            this.targetEnvironmentLabel.Text = "Target";
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
+            // aboutToolButton
+            // 
+            this.aboutToolButton.Name = "aboutToolButton";
+            this.aboutToolButton.Size = new System.Drawing.Size(40, 22);
+            this.aboutToolButton.Text = "About";
+            this.aboutToolButton.Click += new System.EventHandler(this.aboutToolButton_Click);
             // 
             // MyPluginControl
             // 
@@ -316,5 +325,6 @@
         private System.Windows.Forms.Button transferButton;
         private System.Windows.Forms.Button targetEnvironmentButton;
         private System.Windows.Forms.TextBox targetEnvironmentTextBox;
+        private System.Windows.Forms.ToolStripLabel aboutToolButton;
     }
 }

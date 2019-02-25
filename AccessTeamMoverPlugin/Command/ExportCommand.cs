@@ -1,20 +1,21 @@
-﻿using AccessTeamMoverPlugin.Utility;
+﻿using AccessTeamTemplateMoverPlugin.Interface;
+using AccessTeamTemplateMoverPlugin.Utility;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AccessTeamMoverPlugin.Command
+namespace AccessTeamTemplateMoverPlugin.Command
 {
     public class ExportCommand : ICommand
     {
         public string FileName { get; set; }
-
         public bool IsZipFile { get; set; }
         public IOrganizationService Service { get; set; }
+        public ILogWriter LogWriter { get; set; }
+        public string OrganisationUrl { get; set; }
 
         readonly string entityName;
         Dictionary<string, int> typeCodeList;
@@ -23,23 +24,23 @@ namespace AccessTeamMoverPlugin.Command
         {   
             MetadataHelper metadataHelper = new MetadataHelper(Service);
 
-            Console.WriteLine("Retrieving entity list...");
+            LogWriter.LogInfo("ExportCommand: Retrieving entity list");
             typeCodeList = metadataHelper.RetrieveEntityList();
 
             FetchXmlHelper fetchXmlHelper = new FetchXmlHelper();
 
-            Console.WriteLine("Buidling Fetch XML...");
+            LogWriter.LogInfo("ExportCommand: Buidling Fetch XML");
             string fetchXml = fetchXmlHelper.Build(entityName, metadataHelper.RetrieveEntity(entityName).EntityMetadata.Attributes);
+            LogWriter.LogInfo(fetchXml);
 
-            Console.WriteLine("Retrieving data...");
+            LogWriter.LogInfo($"ExportCommand: Exporting data from {OrganisationUrl}");
             EntityCollection entities = Service.RetrieveMultiple(new FetchExpression(fetchXml));
+            LogWriter.LogInfo($"ExportCommand: Retrieved data, Count: {entities.Entities.Count}");
 
-            Console.WriteLine("Inserting entity name...");
             Parallel.ForEach(entities.Entities, entity =>
-            //foreach(Entity entity in entities.Entities)
-            {
-                entity["entityname"] = getEntityName(entity);
-            }
+                {
+                    entity["entityname"] = getEntityName(entity);
+                }
             );
 
             EntityCollectionSerializer ecSerializer = new EntityCollectionSerializer()
@@ -47,7 +48,7 @@ namespace AccessTeamMoverPlugin.Command
                 FileName = FileName,
             };
 
-            Console.WriteLine("Serializing data...");
+            LogWriter.LogInfo("ExportCommand: Serializing data");
             ecSerializer.Serialize(entities);
 
             compressFile();
@@ -57,7 +58,7 @@ namespace AccessTeamMoverPlugin.Command
         {
             if (IsZipFile)
             {
-                Console.WriteLine("Compressing the file...");
+                LogWriter.LogInfo("ExportCommand: Compressing the file");
                 FileZipper.Compress(new FileInfo(FileName));
             }
         }

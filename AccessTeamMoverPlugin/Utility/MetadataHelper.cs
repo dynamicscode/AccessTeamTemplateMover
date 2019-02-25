@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AccessTeamMoverPlugin.Utility
+namespace AccessTeamTemplateMoverPlugin.Utility
 {
     public class MetadataHelper
     {

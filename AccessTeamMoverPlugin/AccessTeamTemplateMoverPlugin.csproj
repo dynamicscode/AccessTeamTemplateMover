@@ -8,8 +8,8 @@
     <ProjectGuid>{BF9DA833-2BBD-44E5-9B1E-4C6282FA923C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AccessTeamMoverPlugin</RootNamespace>
-    <AssemblyName>AccessTeamMoverPlugin</AssemblyName>
+    <RootNamespace>AccessTeamTemplateMoverPlugin</RootNamespace>
+    <AssemblyName>AccessTeamTemplateMoverPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -120,11 +120,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessTeamTemplateMoverAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccessTeamTemplateMoverAbout.Designer.cs">
+      <DependentUpon>AccessTeamTemplateMoverAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="Command\CommandFactory.cs" />
     <Compile Include="Command\ExportCommand.cs" />
-    <Compile Include="Command\ICommand.cs" />
+    <Compile Include="Interface\ICommand.cs" />
     <Compile Include="Command\ImportCommand.cs" />
     <Compile Include="Common\ApplicationArgument.cs" />
+    <Compile Include="Interface\ILogWriter.cs" />
     <Compile Include="MyPlugin.cs" />
     <Compile Include="MyPluginControl.cs">
       <SubType>UserControl</SubType>
@@ -146,11 +153,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AccessTeamTemplateMoverAbout.resx">
+      <DependentUpon>AccessTeamTemplateMoverAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyPluginControl.resx">
       <DependentUpon>MyPluginControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -2,7 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 
-namespace AccessTeamMoverPlugin.Utility
+namespace AccessTeamTemplateMoverPlugin.Utility
 {
     public static class FileZipper
     {

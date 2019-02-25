@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace AccessTeamMoverPlugin.Utility
+namespace AccessTeamTemplateMoverPlugin.Utility
 {
     internal class FetchXmlHelper
     {
