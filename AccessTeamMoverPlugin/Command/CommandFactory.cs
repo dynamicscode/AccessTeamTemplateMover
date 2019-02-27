@@ -1,7 +1,7 @@
-﻿using AccessTeamTemplateMoverPlugin.Common;
-using AccessTeamTemplateMoverPlugin.Interface;
+﻿using DynamicsCode.AccessTeamTemplateMoverPlugin.Common;
+using DynamicsCode.AccessTeamTemplateMoverPlugin.Interface;
 
-namespace AccessTeamTemplateMoverPlugin.Command
+namespace DynamicsCode.AccessTeamTemplateMoverPlugin.Command
 {
     internal class CommandFactory
     {

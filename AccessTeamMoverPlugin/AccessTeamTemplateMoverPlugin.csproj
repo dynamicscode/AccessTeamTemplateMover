@@ -8,8 +8,8 @@
     <ProjectGuid>{BF9DA833-2BBD-44E5-9B1E-4C6282FA923C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AccessTeamTemplateMoverPlugin</RootNamespace>
-    <AssemblyName>AccessTeamTemplateMoverPlugin</AssemblyName>
+    <RootNamespace>DynamicsCode.AccessTeamTemplateMoverPlugin</RootNamespace>
+    <AssemblyName>DynamicsCode.AccessTeamTemplateMoverPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

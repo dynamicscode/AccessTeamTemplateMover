@@ -1,4 +1,4 @@
-﻿namespace AccessTeamTemplateMoverPlugin.Interface
+﻿namespace DynamicsCode.AccessTeamTemplateMoverPlugin.Interface
 {
     public interface ILogWriter
     {

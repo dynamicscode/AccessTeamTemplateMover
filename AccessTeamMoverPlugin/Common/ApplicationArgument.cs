@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AccessTeamTemplateMoverPlugin.Common
+namespace DynamicsCode.AccessTeamTemplateMoverPlugin.Common
 {
     [Flags]
     public enum Operation

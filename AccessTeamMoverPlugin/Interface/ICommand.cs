@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 
-namespace AccessTeamTemplateMoverPlugin.Interface
+namespace DynamicsCode.AccessTeamTemplateMoverPlugin.Interface
 {
     internal interface ICommand
     {

@@ -1,6 +1,6 @@
-﻿using AccessTeamTemplateMoverPlugin.Command;
-using AccessTeamTemplateMoverPlugin.Common;
-using AccessTeamTemplateMoverPlugin.Interface;
+﻿using DynamicsCode.AccessTeamTemplateMoverPlugin.Command;
+using DynamicsCode.AccessTeamTemplateMoverPlugin.Common;
+using DynamicsCode.AccessTeamTemplateMoverPlugin.Interface;
 using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 
-namespace AccessTeamTemplateMoverPlugin
+namespace DynamicsCode.AccessTeamTemplateMoverPlugin
 {
     public partial class MyPluginControl : MultipleConnectionsPluginControlBase, ILogWriter
     {

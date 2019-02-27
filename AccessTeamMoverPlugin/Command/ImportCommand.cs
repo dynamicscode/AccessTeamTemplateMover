@@ -1,11 +1,11 @@
-﻿using AccessTeamTemplateMoverPlugin.Interface;
-using AccessTeamTemplateMoverPlugin.Utility;
+﻿using DynamicsCode.AccessTeamTemplateMoverPlugin.Interface;
+using DynamicsCode.AccessTeamTemplateMoverPlugin.Utility;
 using Microsoft.Xrm.Sdk;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace AccessTeamTemplateMoverPlugin.Command
+namespace DynamicsCode.AccessTeamTemplateMoverPlugin.Command
 {
     public class ImportCommand : ICommand
     {

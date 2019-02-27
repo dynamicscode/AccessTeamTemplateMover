@@ -1,4 +1,4 @@
-﻿namespace AccessTeamTemplateMoverPlugin
+﻿namespace DynamicsCode.AccessTeamTemplateMoverPlugin
 {
     partial class MyPluginControl
     {
@@ -149,6 +149,7 @@
             this.exportAndSaveButton.TabIndex = 3;
             this.exportAndSaveButton.Text = "Export and Save";
             this.exportAndSaveButton.UseVisualStyleBackColor = true;
+            this.exportAndSaveButton.Click += new System.EventHandler(this.exportAndSaveButton_Click);
             // 
             // exportFilePathButton
             // 
@@ -159,6 +160,7 @@
             this.exportFilePathButton.TabIndex = 2;
             this.exportFilePathButton.Text = "Choose file path";
             this.exportFilePathButton.UseVisualStyleBackColor = true;
+            this.exportFilePathButton.Click += new System.EventHandler(this.exportFilePathButton_Click);
             // 
             // exportFilePathTextBox
             // 
@@ -203,6 +205,7 @@
             this.importButton.TabIndex = 3;
             this.importButton.Text = "Import";
             this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
             // chooseImportFileButton
             // 
@@ -213,6 +216,7 @@
             this.chooseImportFileButton.TabIndex = 2;
             this.chooseImportFileButton.Text = "Choose file";
             this.chooseImportFileButton.UseVisualStyleBackColor = true;
+            this.chooseImportFileButton.Click += new System.EventHandler(this.chooseImportFileButton_Click);
             // 
             // importFileTextBox
             // 
@@ -257,6 +261,7 @@
             this.transferButton.TabIndex = 3;
             this.transferButton.Text = "Transfer";
             this.transferButton.UseVisualStyleBackColor = true;
+            this.transferButton.Click += new System.EventHandler(this.transferButton_Click);
             // 
             // targetEnvironmentButton
             // 
@@ -267,6 +272,7 @@
             this.targetEnvironmentButton.TabIndex = 2;
             this.targetEnvironmentButton.Text = "Choose target";
             this.targetEnvironmentButton.UseVisualStyleBackColor = true;
+            this.targetEnvironmentButton.Click += new System.EventHandler(this.targetEnvironmentButton_Click);
             // 
             // targetEnvironmentTextBox
             // 

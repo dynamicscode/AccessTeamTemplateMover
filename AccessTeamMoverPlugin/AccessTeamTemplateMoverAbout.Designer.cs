@@ -1,4 +1,4 @@
-﻿namespace AccessTeamTemplateMoverPlugin
+﻿namespace DynamicsCode.AccessTeamTemplateMoverPlugin
 {
     partial class AccessTeamTemplateMoverAbout
     {

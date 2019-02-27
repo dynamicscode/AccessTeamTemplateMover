@@ -1,5 +1,5 @@
-﻿using AccessTeamTemplateMoverPlugin.Interface;
-using AccessTeamTemplateMoverPlugin.Utility;
+﻿using DynamicsCode.AccessTeamTemplateMoverPlugin.Interface;
+using DynamicsCode.AccessTeamTemplateMoverPlugin.Utility;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AccessTeamTemplateMoverPlugin.Command
+namespace DynamicsCode.AccessTeamTemplateMoverPlugin.Command
 {
     public class ExportCommand : ICommand
     {

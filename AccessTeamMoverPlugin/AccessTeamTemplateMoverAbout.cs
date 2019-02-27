@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccessTeamTemplateMoverPlugin
+namespace DynamicsCode.AccessTeamTemplateMoverPlugin
 {
     public partial class AccessTeamTemplateMoverAbout : Form
     {
