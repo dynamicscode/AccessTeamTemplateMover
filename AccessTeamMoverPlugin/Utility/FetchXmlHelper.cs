@@ -11,7 +11,7 @@ namespace DynamicsCode.AccessTeamTemplateMoverPlugin.Utility
 
         public FetchXmlHelper()
         {
-            ignoredAttributes = new string[] { "issystem" };
+            ignoredAttributes = new string[] { "issystem", "supportingsolutionid" };
         }
 
         public string Build(string entityName, AttributeMetadata[] attributeMetadata)
